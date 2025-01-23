@@ -75,7 +75,7 @@ class DiningPhilosophersDemo:
             self.phil_circles.append(circle_id)
             self.phil_labels.append(label_id)
 
-        #draw small circles for forks
+        # Optionally, draw 5 forks as small circles halfway between philosophers
         fork_r = 10
         for i in range(NUM_PHILOSOPHERS):
             # Fork is between philosopher i and (i+1)
@@ -97,7 +97,7 @@ class DiningPhilosophersDemo:
           4. Eat
           5. Put down forks
           6. Repeat
-        (approach that can lead to deadlock, deadlock scenario forcefully created in the philosopher_all_versions.py)
+        This implementation demonstrates deadlock.
         """
         left_fork = phil_id
         right_fork = (phil_id + 1) % NUM_PHILOSOPHERS
@@ -105,12 +105,12 @@ class DiningPhilosophersDemo:
         while True:
             # 1. THINK
             self.update_state(phil_id, STATE_THINKING)
-            time.sleep(random.uniform(1, 3))  # random thinking time
+            time.sleep(2)  # Fixed thinking time
 
             # 2. Become HUNGRY
             self.update_state(phil_id, STATE_HUNGRY)
 
-            # 3. Try to pick up left fork, then right fork
+            # 3. Try to pick up left fork, then right fork (naive approach)
             self.forks[left_fork].acquire()
             self.update_fork_locked(left_fork, locked=True)
             
@@ -119,7 +119,7 @@ class DiningPhilosophersDemo:
 
             # 4. EAT
             self.update_state(phil_id, STATE_EATING)
-            time.sleep(random.uniform(1, 3))  # random eating time
+            time.sleep(2)  # Fixed eating time
 
             # 5. Put down forks
             self.forks[left_fork].release()
@@ -163,6 +163,7 @@ class DiningPhilosophersDemo:
             self.canvas.itemconfig(fork_circle, fill=color)
 
         self.window.after(0, _update)
+
 
 if __name__ == "__main__":
     DiningPhilosophersDemo()
