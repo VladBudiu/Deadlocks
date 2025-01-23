@@ -164,5 +164,6 @@ class DiningPhilosophersDemo:
 
         self.window.after(0, _update)
 
+
 if __name__ == "__main__":
     DiningPhilosophersDemo()

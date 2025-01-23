@@ -75,7 +75,7 @@ class DiningPhilosophersDemo:
             self.phil_circles.append(circle_id)
             self.phil_labels.append(label_id)
 
-        # Optionally, draw 5 forks as small circles halfway between philosophers
+        #draw small circles for forks
         fork_r = 10
         for i in range(NUM_PHILOSOPHERS):
             # Fork is between philosopher i and (i+1)
@@ -97,7 +97,7 @@ class DiningPhilosophersDemo:
           4. Eat
           5. Put down forks
           6. Repeat
-        (Naive approach that can lead to deadlock.)
+        (approach that can lead to deadlock, deadlock scenario forcefully created in the philosopher_all_versions.py)
         """
         left_fork = phil_id
         right_fork = (phil_id + 1) % NUM_PHILOSOPHERS
